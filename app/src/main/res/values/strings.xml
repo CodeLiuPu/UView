@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">UView</string>
+    <string name="input_hint_choose">Please Choose</string>
+    <string name="input_hint_enter">Please Enter</string>
+    <string name="input_hint_authorize">Please authorize</string>
+
+    <!--性别-->
+    <string name="input_title">Title</string>
+    <string name="input_content">Content</string>
+    <string name="input_error">Gender is null</string>
+
+    <!--性别-->
+    <string name="input_title1">哈哈哈</string>
+    <string name="input_content1">hhh</string>
+    <string name="input_error1">很多很多 is null</string>
+</resources>
