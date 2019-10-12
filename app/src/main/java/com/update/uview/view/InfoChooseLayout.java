@@ -17,7 +17,7 @@ import com.update.uview.R;
  * date   : 2019/4/26
  * desc   :
  */
-public class InfoChooseView extends LinearLayout {
+public class InfoChooseLayout extends LinearLayout {
     View view;
     TypedArray typedArray;
     TextView tv_title;
@@ -29,15 +29,15 @@ public class InfoChooseView extends LinearLayout {
     String title;
     String content;
     String error;
-    public InfoChooseView(Context context) {
+    public InfoChooseLayout(Context context) {
         this(context, null);
     }
 
-    public InfoChooseView(Context context, AttributeSet attrs) {
+    public InfoChooseLayout(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public InfoChooseView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public InfoChooseLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context);
         initAppTypedArray(context,attrs);
@@ -55,9 +55,9 @@ public class InfoChooseView extends LinearLayout {
 
     private void initAppTypedArray(Context context, AttributeSet attrs) {
         typedArray = context.obtainStyledAttributes(attrs, R.styleable.info_choose);
-        title = typedArray.getString(R.styleable.info_choose_up_title);
-        content = typedArray.getString(R.styleable.info_choose_up_content);
-        error = typedArray.getString(R.styleable.info_choose_up_error_message);
+        title = typedArray.getString(R.styleable.info_choose_icv_title);
+        content = typedArray.getString(R.styleable.info_choose_icv_content);
+        error = typedArray.getString(R.styleable.info_choose_icv_error_message);
         tv_title.setText(title);
         tv_content.setText(content);
         tv_error.setText(error);
