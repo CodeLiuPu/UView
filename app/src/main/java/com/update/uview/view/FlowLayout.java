@@ -4,7 +4,12 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 
-
+/**
+ * @author : liupu
+ * date   : 2019/10/12
+ * desc   :
+ * github : https://github.com/CodeLiuPu/
+ */
 public class FlowLayout extends ViewGroup {
     public FlowLayout(Context context) {
         this(context, null);

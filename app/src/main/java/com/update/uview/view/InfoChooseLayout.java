@@ -16,6 +16,7 @@ import com.update.uview.R;
  * @author : liupu
  * date   : 2019/4/26
  * desc   :
+ * github : https://github.com/CodeLiuPu/
  */
 public class InfoChooseLayout extends LinearLayout {
     View view;
@@ -29,6 +30,7 @@ public class InfoChooseLayout extends LinearLayout {
     String title;
     String content;
     String error;
+
     public InfoChooseLayout(Context context) {
         this(context, null);
     }
@@ -40,7 +42,7 @@ public class InfoChooseLayout extends LinearLayout {
     public InfoChooseLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context);
-        initAppTypedArray(context,attrs);
+        initAppTypedArray(context, attrs);
     }
 
     private void initView(Context context) {
