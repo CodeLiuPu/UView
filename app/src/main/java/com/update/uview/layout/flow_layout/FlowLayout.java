@@ -1,4 +1,4 @@
-package com.update.uview.layout.flowlayout;
+package com.update.uview.layout.flow_layout;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * @author : liupu
  * date   : 2019/10/12
- * desc   :
+ * desc   : 流布局
  * github : https://github.com/CodeLiuPu/
  */
 public class FlowLayout extends ViewGroup {

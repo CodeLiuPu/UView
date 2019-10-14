@@ -1,4 +1,4 @@
-package com.update.uview.layout.flowlayout;
+package com.update.uview.layout.flow_layout;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
