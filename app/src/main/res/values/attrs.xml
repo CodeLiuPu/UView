@@ -1,8 +1,6 @@
 <resources>
 
-    <declare-styleable name="info_choose">
-        <attr name="icv_title" format="string" />
-        <attr name="icv_content" format="string" />
-        <attr name="icv_error_message" format="string" />
+    <declare-styleable name="flow_layout">
+        <attr name="fl_max_select" format="integer" />
     </declare-styleable>
 </resources>

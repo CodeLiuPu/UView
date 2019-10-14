@@ -1,8 +1,15 @@
 package com.update.uview.layout.flowlayout;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
+
+import com.update.uview.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author : liupu
@@ -11,6 +18,17 @@ import android.view.ViewGroup;
  * github : https://github.com/CodeLiuPu/
  */
 public class FlowLayout extends ViewGroup {
+    private static final String TAG = "FlowLayout";
+    private static final int LEFT = -1;
+    private static final int CENTER = 0;
+    private static final int RIGHT = 1;
+
+    protected List<List<View>> mAllViews = new ArrayList<>();
+    protected List<Integer> mLineHeight = new ArrayList<>();
+    protected List<Integer> mLineWidth = new ArrayList<>();
+    private int mGravity;
+    private List<View> lineViews = new ArrayList<>();
+
     public FlowLayout(Context context) {
         this(context, null);
     }
@@ -21,6 +39,7 @@ public class FlowLayout extends ViewGroup {
 
     public FlowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.flow_layout);
     }
 
     @Override
