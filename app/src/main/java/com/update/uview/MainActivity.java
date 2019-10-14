@@ -21,13 +21,11 @@ import java.util.List;
  */
 public class MainActivity extends AppCompatActivity {
     private List<String> titles = Arrays.asList(
-            "AAAAA",
             "FlowLayout",
             "TriangleLayout"
     );
 
     private List<Fragment> fragments = Arrays.asList(
-            new AFragment(),
             new FlowLayoutFragment(),
             new TriangleLayoutFragment()
     );
