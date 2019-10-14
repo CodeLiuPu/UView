@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.update.uview.adapter.FmPagerAdapter;
+import com.update.uview.layout.flowlayout.FlowLayoutFragment;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,13 +20,13 @@ import java.util.List;
  */
 public class MainActivity extends AppCompatActivity {
     private List<String> titles = Arrays.asList(
-            "hahah",
-            "hahah"
+            "AAAAA",
+            "FlowLayout"
     );
 
     private List<Fragment> fragments = Arrays.asList(
             new AFragment(),
-            new AFragment()
+            new FlowLayoutFragment()
     );
 
     @Override

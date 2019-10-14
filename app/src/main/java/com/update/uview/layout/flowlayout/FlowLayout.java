@@ -1,4 +1,4 @@
-package com.update.uview.view;
+package com.update.uview.layout.flowlayout;
 
 import android.content.Context;
 import android.util.AttributeSet;
