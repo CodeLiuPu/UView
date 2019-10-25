@@ -34,7 +34,7 @@ public class PaintView extends View {
         mPaint = new Paint();
         mPaint.setColor(Color.BLUE); // 设置颜色
         mPaint.setAlpha(100); // 设置透明度 范围是 0 ~ 255
-
+        mPaint.setStyle(Paint.Style.FILL);
     }
 
     @Override
