@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -39,7 +40,11 @@ public class PaintView extends View {
         mPaint.setStrokeWidth(3);
         mPaint.setStrokeCap(Paint.Cap.SQUARE);
         mPaint.setStrokeJoin(Paint.Join.BEVEL);
-
+        mPaint.setShader(new SweepGradient(200,200,Color.BLUE,Color.RED));
+        mPaint.setTextScaleX(2);
+        mPaint.setTextSize(26);
+        mPaint.setTextAlign(Paint.Align.LEFT);
+        mPaint.setUnderlineText(true);
     }
 
     @Override
