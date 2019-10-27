@@ -33,8 +33,13 @@ public class PaintView extends View {
     private void init() {
         mPaint = new Paint();
         mPaint.setColor(Color.BLUE); // 设置颜色
-        mPaint.setAlpha(100); // 设置透明度 范围是 0 ~ 255
-        mPaint.setStyle(Paint.Style.FILL);
+//        mPaint.setAlpha(100); // 设置透明度 范围是 0 ~ 255
+        mPaint.setARGB(100,255,0,0);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(3);
+        mPaint.setStrokeCap(Paint.Cap.SQUARE);
+        mPaint.setStrokeJoin(Paint.Join.BEVEL);
+
     }
 
     @Override
