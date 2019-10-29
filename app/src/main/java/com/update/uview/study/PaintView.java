@@ -3,9 +3,8 @@ package com.update.uview.study;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
-import android.graphics.RectF;
+import android.graphics.RadialGradient;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
@@ -57,7 +56,11 @@ public class PaintView extends View {
         super.onDraw(canvas);
 
 //        Shader shader = new LinearGradient(0, 0, 500, 500, Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
-        Shader shader = new LinearGradient(0, 0, 500, 500, new int[]{Color.RED, Color.BLUE, Color.GREEN}, new float[]{0.3f, 0.6f, 1f}, Shader.TileMode.CLAMP);
+//        Shader shader = new LinearGradient(0, 0, 500, 500, new int[]{Color.RED, Color.BLUE, Color.GREEN}, new float[]{0.3f, 0.6f, 1f}, Shader.TileMode.CLAMP);
+
+//        Shader shader = new RadialGradient(250, 250, 250, Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
+        Shader shader = new RadialGradient(250, 250, 250, new int[]{Color.RED, Color.BLUE, Color.GREEN}, new float[]{0.3f, 0.6f, 1f}, Shader.TileMode.CLAMP);
+
         mPaint.setShader(shader);
 
         canvas.drawCircle(250, 250, 250, mPaint);
