@@ -1,13 +1,20 @@
 package com.update.uview.study;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ComposeShader;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.Shader;
-import android.graphics.SweepGradient;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.update.uview.R;
 
 /**
  * @author : liupu
@@ -62,13 +69,23 @@ public class PaintView extends View {
 //        Shader shader = new RadialGradient(250, 250, 250, new int[]{Color.RED, Color.BLUE, Color.GREEN}, new float[]{0.3f, 0.6f, 1f}, Shader.TileMode.CLAMP);
 
 //        Shader shader = new SweepGradient(250f,250f,Color.RED,Color.BLUE);
-        Shader shader = new SweepGradient(250f, 250f, new int[]{Color.RED, Color.BLUE, Color.GREEN}, new float[]{0.3f, 0.6f, 1f});
-        mPaint.setShader(shader);
+//        Shader shader = new SweepGradient(250f, 250f, new int[]{Color.RED, Color.BLUE, Color.GREEN}, new float[]{0.3f, 0.6f, 1f});
 
+//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.beauty);
+//        Shader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+
+
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.beauty);
+        Shader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+        Shader linearGradient = new LinearGradient(0, 0, 500, 500, Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
+        Shader shader = new ComposeShader(bitmapShader, linearGradient, PorterDuff.Mode.MULTIPLY);
+
+        mPaint.setShader(shader);
         canvas.drawCircle(250, 250, 250, mPaint);
 
 //        Rect rect = new Rect(0,0,500,500);
 //        RectF rect = new RectF(0, 0, 500, 500);
+
 //        canvas.drawRect(rect, mPaint);
 
     }
