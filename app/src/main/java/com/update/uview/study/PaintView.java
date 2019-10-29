@@ -3,11 +3,10 @@ package com.update.uview.study;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LightingColorFilter;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.SweepGradient;
+import android.graphics.RectF;
+import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -36,28 +35,36 @@ public class PaintView extends View {
 
     private void init() {
         mPaint = new Paint();
-        mPaint.setColor(Color.BLUE); // 设置颜色
+//        mPaint.setColor(Color.BLUE); // 设置颜色
 //        mPaint.setAlpha(100); // 设置透明度 范围是 0 ~ 255
-        mPaint.setARGB(100,255,0,0);
-        mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setStrokeWidth(3);
-        mPaint.setStrokeCap(Paint.Cap.SQUARE);
-        mPaint.setStrokeJoin(Paint.Join.BEVEL);
-        mPaint.setShader(new SweepGradient(200,200,Color.BLUE,Color.RED));
-        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DARKEN));
-        mPaint.setColorFilter(new LightingColorFilter(0x00ffff,0x000000));
-        mPaint.setFilterBitmap(true);
-        mPaint.setTextScaleX(2);
-        mPaint.setTextSize(26);
-        mPaint.setTextAlign(Paint.Align.LEFT);
-        mPaint.setUnderlineText(true);
+//        mPaint.setARGB(100,255,0,0);
+        mPaint.setStyle(Paint.Style.FILL);
+//        mPaint.setStrokeWidth(3);
+//        mPaint.setStrokeCap(Paint.Cap.SQUARE);
+//        mPaint.setStrokeJoin(Paint.Join.BEVEL);
+//        mPaint.setShader(new SweepGradient(200,200,Color.BLUE,Color.RED));
+//        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DARKEN));
+//        mPaint.setColorFilter(new LightingColorFilter(0x00ffff,0x000000));
+//        mPaint.setFilterBitmap(true);
+//        mPaint.setTextScaleX(2);
+//        mPaint.setTextSize(26);
+//        mPaint.setTextAlign(Paint.Align.LEFT);
+//        mPaint.setUnderlineText(true);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawText("Hello", 100, 100, mPaint);
+//        Shader shader = new LinearGradient(0, 0, 500, 500, Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
+        Shader shader = new LinearGradient(0, 0, 500, 500, new int[]{Color.RED, Color.BLUE, Color.GREEN}, new float[]{0.3f, 0.6f, 1f}, Shader.TileMode.CLAMP);
+        mPaint.setShader(shader);
+
+        canvas.drawCircle(250, 250, 250, mPaint);
+
+//        Rect rect = new Rect(0,0,500,500);
+//        RectF rect = new RectF(0, 0, 500, 500);
+//        canvas.drawRect(rect, mPaint);
 
     }
 }
