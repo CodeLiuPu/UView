@@ -1,4 +1,4 @@
-package com.update.uview.study;
+package com.update.uview.study.paint;
 
 import android.content.Context;
 import android.graphics.Bitmap;

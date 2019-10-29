@@ -9,7 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import com.update.uview.adapter.FmPagerAdapter;
 import com.update.uview.layout.flow_layout.FlowLayoutFragment;
 import com.update.uview.layout.triangle_layout.TriangleLayoutFragment;
-import com.update.uview.study.PaintFragment;
+import com.update.uview.study.paint.PaintFragment;
+import com.update.uview.study.xfermode.XfermodeFragment;
 
 import java.util.Arrays;
 import java.util.List;
@@ -22,12 +23,14 @@ import java.util.List;
  */
 public class MainActivity extends AppCompatActivity {
     private List<String> titles = Arrays.asList(
+            "XfermodeView",
             "PaintView",
             "FlowLayout",
             "TriangleLayout"
     );
 
     private List<Fragment> fragments = Arrays.asList(
+            new XfermodeFragment(),
             new PaintFragment(),
             new FlowLayoutFragment(),
             new TriangleLayoutFragment()
