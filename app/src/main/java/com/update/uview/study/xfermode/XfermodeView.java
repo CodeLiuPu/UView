@@ -11,6 +11,7 @@ import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.Xfermode;
 import android.util.AttributeSet;
@@ -73,12 +74,14 @@ public class XfermodeView extends View {
 
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.beauty);
         Shader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
-        Shader linearGradient = new LinearGradient(0, 0, 500, 500, Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
-        Shader shader = new ComposeShader(bitmapShader, linearGradient, PorterDuff.Mode.MULTIPLY);
+//        Shader linearGradient = new LinearGradient(0, 0, 500, 500, Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
+        Shader linearGradient = new LinearGradient(250, 250, 300, 300, Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
+        Shader shader = new ComposeShader(bitmapShader, linearGradient, PorterDuff.Mode.DARKEN);
 
         mPaint.setShader(shader);
-        canvas.drawCircle(250, 250, 250, mPaint);
-
+//        canvas.drawCircle(250, 250, 250, mPaint);
+        Rect rect = new Rect(0, 0, 500, 500);
+        canvas.drawRect(rect, mPaint);
     }
 
 }
