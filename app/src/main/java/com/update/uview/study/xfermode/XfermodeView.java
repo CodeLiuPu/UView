@@ -10,7 +10,9 @@ import android.graphics.ComposeShader;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Shader;
+import android.graphics.Xfermode;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -23,6 +25,27 @@ import com.update.uview.R;
  * github : https://github.com/CodeLiuPu/
  */
 public class XfermodeView extends View {
+
+    private static final Xfermode[] xfermodes = {
+            new PorterDuffXfermode(PorterDuff.Mode.CLEAR),
+            new PorterDuffXfermode(PorterDuff.Mode.SRC),
+            new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER),
+            new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP),
+            new PorterDuffXfermode(PorterDuff.Mode.SRC_IN),
+            new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT),
+            new PorterDuffXfermode(PorterDuff.Mode.DST),
+            new PorterDuffXfermode(PorterDuff.Mode.DST_OVER),
+            new PorterDuffXfermode(PorterDuff.Mode.DST_ATOP),
+            new PorterDuffXfermode(PorterDuff.Mode.DST_IN),
+            new PorterDuffXfermode(PorterDuff.Mode.DST_OUT),
+            new PorterDuffXfermode(PorterDuff.Mode.XOR),
+            new PorterDuffXfermode(PorterDuff.Mode.DARKEN),
+            new PorterDuffXfermode(PorterDuff.Mode.LIGHTEN),
+            new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY),
+            new PorterDuffXfermode(PorterDuff.Mode.SCREEN),
+            new PorterDuffXfermode(PorterDuff.Mode.ADD),
+            new PorterDuffXfermode(PorterDuff.Mode.OVERLAY)
+    };
 
     private Paint mPaint;
 
@@ -57,4 +80,5 @@ public class XfermodeView extends View {
         canvas.drawCircle(250, 250, 250, mPaint);
 
     }
+
 }
