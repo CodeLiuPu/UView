@@ -49,6 +49,9 @@ public class XfermodeView extends View {
     };
 
     private Paint mPaint;
+    private int mWidth;
+    private int mHeight;
+
 
     public XfermodeView(Context context) {
         this(context, null);
@@ -65,18 +68,31 @@ public class XfermodeView extends View {
 
     private void init() {
         mPaint = new Paint();
-        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setColor(Color.RED);
+        mPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mWidth = MeasureSpec.getSize(widthMeasureSpec);
+        mHeight = MeasureSpec.getSize(heightMeasureSpec);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        //禁止硬件加速
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
+        setBackgroundColor(Color.GRAY);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.beauty);
         Shader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
 //        Shader linearGradient = new LinearGradient(0, 0, 500, 500, Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
-        Shader linearGradient = new LinearGradient(250, 250, 300, 300, Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
-        Shader shader = new ComposeShader(bitmapShader, linearGradient, PorterDuff.Mode.DARKEN);
+//        Shader linearGradient = new LinearGradient(250, 250, 300, 300, Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
+        Shader linearGradient = new LinearGradient(0, 0, 500, 500, new int[]{Color.RED, Color.BLUE, Color.GREEN}, new float[]{0.3f, 0.6f, 1f}, Shader.TileMode.CLAMP);
+
+        Shader shader = new ComposeShader(bitmapShader, linearGradient, PorterDuff.Mode.ADD);
 
         mPaint.setShader(shader);
 //        canvas.drawCircle(250, 250, 250, mPaint);
