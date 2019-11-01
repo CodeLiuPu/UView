@@ -1,23 +1,17 @@
 package com.update.uview.study.xfermode;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.ComposeShader;
-import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.graphics.Shader;
 import android.graphics.Xfermode;
 import android.util.AttributeSet;
 import android.view.View;
-
-import com.update.uview.R;
 
 /**
  * @author : liupu
@@ -79,25 +73,51 @@ public class XfermodeView extends View {
         mHeight = MeasureSpec.getSize(heightMeasureSpec);
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         //禁止硬件加速
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-
         setBackgroundColor(Color.GRAY);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.beauty);
-        Shader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
-//        Shader linearGradient = new LinearGradient(0, 0, 500, 500, Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
-//        Shader linearGradient = new LinearGradient(250, 250, 300, 300, Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
-        Shader linearGradient = new LinearGradient(0, 0, 500, 500, new int[]{Color.RED, Color.BLUE, Color.GREEN}, new float[]{0.3f, 0.6f, 1f}, Shader.TileMode.CLAMP);
 
-        Shader shader = new ComposeShader(bitmapShader, linearGradient, PorterDuff.Mode.ADD);
+        // 离屏绘制
+        int layerId = canvas.saveLayer(0, 0, getWidth(), getHeight(), mPaint, Canvas.ALL_SAVE_FLAG);
 
-        mPaint.setShader(shader);
-//        canvas.drawCircle(250, 250, 250, mPaint);
-        Rect rect = new Rect(0, 0, 500, 500);
-        canvas.drawRect(rect, mPaint);
+        // 绘制
+        Bitmap srcBitmap = createCircleBitmap(mWidth, mHeight);
+        canvas.drawBitmap(srcBitmap, 0, 0, mPaint);
+
+        // 设置 图层混合模式
+        mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
+
+        // 绘制 dst 图层
+        Bitmap dstBitmap = createRectBitmap(mWidth, mHeight);
+        canvas.drawBitmap(dstBitmap, 0, 0, mPaint);
+
+        // 清除 图层混合模式
+        mPaint.setXfermode(null);
+
+        canvas.restoreToCount(layerId);
+    }
+
+    private Bitmap createRectBitmap(int width, int height) {
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColor(Color.BLUE);
+        Rect rect = new Rect(width / 20, height / 3, width * 2 / 3, height * 19 / 20);
+        canvas.drawRect(rect, paint);
+        return bitmap;
+    }
+
+    private Bitmap createCircleBitmap(int width, int height) {
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColor(Color.RED);
+        canvas.drawCircle(width * 2 / 3, height / 3, height / 4, paint);
+        return bitmap;
     }
 
 }
