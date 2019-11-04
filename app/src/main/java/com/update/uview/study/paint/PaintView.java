@@ -71,11 +71,11 @@ public class PaintView extends View {
 //        Shader shader = new SweepGradient(250f,250f,Color.RED,Color.BLUE);
 //        Shader shader = new SweepGradient(250f, 250f, new int[]{Color.RED, Color.BLUE, Color.GREEN}, new float[]{0.3f, 0.6f, 1f});
 
-//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.beauty);
+//        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.paint_beauty);
 //        Shader shader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
 
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.beauty);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.paint_beauty);
         Shader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
         Shader linearGradient = new LinearGradient(0, 0, 500, 500, Color.RED, Color.BLUE, Shader.TileMode.CLAMP);
         Shader shader = new ComposeShader(bitmapShader, linearGradient, PorterDuff.Mode.MULTIPLY);

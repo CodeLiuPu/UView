@@ -53,8 +53,8 @@ public class XfermodeEraserView extends View {
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
 
         // 初始化图片对象
-        mTxtBmp = BitmapFactory.decodeResource(getResources(), R.mipmap.result);
-        mSrcBmp = BitmapFactory.decodeResource(getResources(), R.mipmap.eraser);
+        mTxtBmp = BitmapFactory.decodeResource(getResources(), R.mipmap.xfermode_result);
+        mSrcBmp = BitmapFactory.decodeResource(getResources(), R.mipmap.xfermode_eraser);
         mDstBmp = Bitmap.createBitmap(mSrcBmp.getWidth(), mSrcBmp.getHeight(), Bitmap.Config.ARGB_8888);
 
         // 路径 (贝塞尔曲线)
