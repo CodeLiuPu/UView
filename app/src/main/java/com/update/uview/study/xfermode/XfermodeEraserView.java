@@ -10,6 +10,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.update.uview.R;
@@ -79,9 +80,36 @@ public class XfermodeEraserView extends View {
         mPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OUT));
 
         // 绘制源图像
-        canvas.drawBitmap(mSrcBmp,0,0,mPaint);
+        canvas.drawBitmap(mSrcBmp, 0, 0, mPaint);
         mPaint.setXfermode(null);
 
         canvas.restoreToCount(layerId);
+    }
+
+    private float mEventX;
+    private float mEventY;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        super.onTouchEvent(event);
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mEventX = event.getX();
+                mEventY = event.getY();
+                mPath.moveTo(mEventX, mEventY);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                float endX = (event.getX() - mEventX) / 2 + mEventX;
+                float endY = (event.getY() - mEventY) / 2 + mEventY;
+                // 绘制 二阶贝塞尔曲线
+                mPath.quadTo(mEventX, mEventY, endX, endY);
+                mEventX = event.getX();
+                mEventY = event.getY();
+                break;
+            default:
+        }
+
+        invalidate();
+        return true;
     }
 }
