@@ -46,7 +46,8 @@ public class XfermodesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new SampleView(this));
+//        setContentView(new SampleView(this));
+        setContentView(new XfermodeEraserView(this));
     }
 
     private static class SampleView extends View {
