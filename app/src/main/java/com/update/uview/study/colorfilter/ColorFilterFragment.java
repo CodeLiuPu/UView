@@ -18,7 +18,7 @@ public class ColorFilterFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return new PaintView(getActivity());
+        return new ColorFilterView(getActivity());
     }
 
 }

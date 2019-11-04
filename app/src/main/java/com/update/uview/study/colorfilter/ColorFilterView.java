@@ -1,6 +1,9 @@
 package com.update.uview.study.colorfilter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -11,6 +14,10 @@ import android.view.View;
  * github : https://github.com/CodeLiuPu/
  */
 public class ColorFilterView extends View {
+    private Paint mPaint;
+    private Bitmap mBitmap;
+    private ColorMatrixColorFilter mColorMatrixColorFilter;
+
     public ColorFilterView(Context context) {
         this(context, null);
     }
