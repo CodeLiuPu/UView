@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -68,20 +70,32 @@ public class ColorFilterView extends View {
 
 // ------------------- ColorMatrixColorFilter ------------------------
 
-//        ColorMatrix cm = new ColorMatrix();
-//        //亮度调节
-//        cm.setScale(1, 2, 1, 1);
+//        float[] colorMatrix = {
+//                1, 0, 0, 0, 0,   //red
+//                0, 1, 0, 0, 0,   //green
+//                0, 0, 1, 0, 0,   //blue
+//                0, 0, 0, 1, 0    //alpha
+//        };
 //
-//        //饱和度调节0-无色彩， 1- 默认效果， >1饱和度加强
-//        cm.setSaturation(2);
-//
-//        //色调调节
-//        cm.setRotate(0, 45);
-//
-//        ColorMatrixColorFilter colorMatrixColorFilter = new ColorMatrixColorFilter(cm);
+//        ColorMatrixColorFilter colorMatrixColorFilter = new ColorMatrixColorFilter(colorMatrix);
 //        mPaint.setColorFilter(colorMatrixColorFilter);
-//
 //        canvas.drawBitmap(mBitmap, 100, 100, mPaint);
+
+
+        ColorMatrix cm = new ColorMatrix();
+        //亮度调节
+//        cm.setScale(100, 1, 1, 1);
+
+        //饱和度调节
+        cm.setSaturation(1);
+
+        //色调调节
+        cm.setRotate(0, 45);
+
+        ColorMatrixColorFilter colorMatrixColorFilter = new ColorMatrixColorFilter(cm);
+        mPaint.setColorFilter(colorMatrixColorFilter);
+        canvas.drawBitmap(mBitmap, 100, 100, mPaint);
+
 // ---------------------------------------------------------------
     }
 
