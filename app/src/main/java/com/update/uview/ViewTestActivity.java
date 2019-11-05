@@ -3,7 +3,7 @@ package com.update.uview;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.update.uview.study.colorfilter.ColorFilterView;
+import com.update.uview.study.canvas.CanvasTransformView;
 
 /**
  * google APIDemo
@@ -14,7 +14,7 @@ public class ViewTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(new SampleView(this));
-        setContentView(new ColorFilterView(this));
+        setContentView(new CanvasTransformView(this));
     }
 
 
