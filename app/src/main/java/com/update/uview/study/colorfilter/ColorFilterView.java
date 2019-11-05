@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
@@ -48,43 +47,23 @@ public class ColorFilterView extends View {
 
 //        ColorMatrix cm = new ColorMatrix();
 //        //亮度调节
-//        cm.setScale(1,2,1,1);
-
+//        cm.setScale(1, 2, 1, 1);
+//
 //        //饱和度调节0-无色彩， 1- 默认效果， >1饱和度加强
 //        cm.setSaturation(2);
-
-        //色调调节
+//
+//        //色调调节
 //        cm.setRotate(0, 45);
-
+//
 //        mColorMatrixColorFilter = new ColorMatrixColorFilter(cm);
+//        mPaint.setColorFilter(mColorMatrixColorFilter);
+//
+//        canvas.drawBitmap(mBitmap, 100, 100, mPaint);
 
 
-        LightingColorFilter lightingColorFilter = new LightingColorFilter(0x00ffff,0x000000);
+        LightingColorFilter lightingColorFilter = new LightingColorFilter(0x0000ffff,0x00000000);
         mPaint.setColorFilter(lightingColorFilter);
-        canvas.drawBitmap(mBitmap,100,0,mPaint);
+        canvas.drawBitmap(mBitmap,100,100,mPaint);
     }
 
-
-
-
-
-
-
-
-
-
-
-    private void test(){
-        float[] colorMatrix = {
-                2, 0, 0, 0, 0,   //red
-                0, 1, 0, 0, 0,   //green
-                0, 0, 1, 0, 0,   //blue
-                0, 0, 0, 1, 0    //alpha
-        };
-
-        ColorMatrix cm = new ColorMatrix();
-
-        // 亮度调节
-        cm.setScale(1,2,1,1);
-    }
 }
