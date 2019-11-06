@@ -3,8 +3,8 @@ package com.update.uview.study.canvas;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -78,11 +78,23 @@ public class CanvasTransformView extends View {
 //        canvas.drawRect(rect, mPaint);
 
         // 切割操作
-        canvas.clipRect(200, 200,700, 700);
-        // 坐标区域在裁剪范围内，绘制成功
-        canvas.drawRect(300, 300,400, 400, mPaint);
+//        canvas.clipRect(200, 200,700, 700);
+//        // 坐标区域在裁剪范围内，绘制成功
+//        canvas.drawRect(300, 300,400, 400, mPaint);
+//        mPaint.setColor(Color.BLUE);
+//        // 坐标超出裁剪区域，无法绘制
+//        canvas.drawRect(200, 200,800, 700, mPaint);
+
+        // 矩阵操作
+        canvas.drawRect(0, 0, 700, 700, mPaint);
+        Matrix matrix = new Matrix();
+        // 平移
+        matrix.setTranslate(100,100);
+        // 缩放
+//        matrix.setScale(0.5f,0.5f);
+        canvas.setMatrix(matrix);
         mPaint.setColor(Color.BLUE);
-        // 坐标超出裁剪区域，无法绘制
-        canvas.drawRect(200, 200,800, 700, mPaint);
+        canvas.drawRect(0, 0, 700, 700, mPaint);
+
     }
 }
