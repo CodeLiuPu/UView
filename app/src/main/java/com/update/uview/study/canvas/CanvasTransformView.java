@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -41,6 +42,16 @@ public class CanvasTransformView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.drawCircle(100,100,50,mPaint);
+        // 1. 平移操作
+        Rect rect = new Rect(0,0,400,400);
+        canvas.drawRect(rect,mPaint);
+        mPaint.setColor(Color.BLUE);
+        rect = new Rect(200,200,600,600);
+        canvas.drawRect(rect,mPaint);
+        canvas.drawLine(0,0,600,600,mPaint);
+
+
+
+
     }
 }
