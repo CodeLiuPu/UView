@@ -62,12 +62,19 @@ public class CanvasTransformView extends View {
 //        canvas.drawRect(rect, mPaint);
 
         // 旋转操作
-        Rect rect = new Rect(0, 0, 300, 300);
-        canvas.translate(200,200);
-        canvas.drawRect(rect, mPaint);
-        mPaint.setColor(Color.GREEN);
-        canvas.rotate(45,150,150);
-        canvas.drawRect(rect, mPaint);
+//        Rect rect = new Rect(0, 0, 300, 300);
+//        canvas.translate(200,200);
+//        canvas.drawRect(rect, mPaint);
+//        mPaint.setColor(Color.GREEN);
+//        canvas.rotate(45,150,150);
+//        canvas.drawRect(rect, mPaint);
 
+        // 倾斜操作
+        Rect rect = new Rect(0, 0, 300, 300);
+        canvas.translate(200, 200);
+        canvas.drawRect(rect, mPaint);
+        canvas.skew(0, -1);
+        mPaint.setColor(Color.BLUE);
+        canvas.drawRect(rect, mPaint);
     }
 }
