@@ -70,11 +70,19 @@ public class CanvasTransformView extends View {
 //        canvas.drawRect(rect, mPaint);
 
         // 倾斜操作
-        Rect rect = new Rect(0, 0, 300, 300);
-        canvas.translate(200, 200);
-        canvas.drawRect(rect, mPaint);
-        canvas.skew(0, -1);
+//        Rect rect = new Rect(0, 0, 300, 300);
+//        canvas.translate(200, 200);
+//        canvas.drawRect(rect, mPaint);
+//        canvas.skew(0, -1);
+//        mPaint.setColor(Color.BLUE);
+//        canvas.drawRect(rect, mPaint);
+
+        // 切割操作
+        canvas.clipRect(200, 200,700, 700);
+        // 坐标区域在裁剪范围内，绘制成功
+        canvas.drawRect(300, 300,400, 400, mPaint);
         mPaint.setColor(Color.BLUE);
-        canvas.drawRect(rect, mPaint);
+        // 坐标超出裁剪区域，无法绘制
+        canvas.drawRect(200, 200,800, 700, mPaint);
     }
 }
