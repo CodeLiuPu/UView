@@ -3,7 +3,7 @@ package com.update.uview;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.update.uview.study.canvas.CanvasSaveRestoreView;
+import com.update.uview.study.canvas.CanvasSplitView;
 
 /**
  * @author : liupu
@@ -16,7 +16,7 @@ public class ViewTestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new CanvasSaveRestoreView(this));
+        setContentView(new CanvasSplitView(this));
     }
 
 }
