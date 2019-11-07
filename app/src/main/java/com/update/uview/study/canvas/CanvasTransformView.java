@@ -90,6 +90,7 @@ public class CanvasTransformView extends View {
         Matrix matrix = new Matrix();
         // 平移
         matrix.setTranslate(100,100);
+        matrix.setRotate(45);
         // 缩放
 //        matrix.setScale(0.5f,0.5f);
         canvas.setMatrix(matrix);
