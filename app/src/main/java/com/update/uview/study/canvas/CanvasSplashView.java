@@ -39,12 +39,12 @@ public class CanvasSplashView extends View {
     // 6个小球的半径
     private float mCircleRadius = 18;
     // 旋转大圆的半径
-    private float mRetateCircleRadius = 90;
+    private float mRetateRadius = 90;
 
     // 当前大圆的旋转角度
     private float mCurrentRotateAngle = 0f;
     // 当前大圆的半径
-    private float mCurrentRotateRadius = mRetateCircleRadius;
+    private float mCurrentRotateRadius = mRetateRadius;
     // 扩散圆的半径
     private float mCurrentHoleRadius = 0f;
     // 旋转动画的时长
@@ -106,7 +106,7 @@ public class CanvasSplashView extends View {
             valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-                    mCurrentRotateAngle =(float) animation.getAnimatedValue();
+                    mCurrentRotateAngle = (float) animation.getAnimatedValue();
                     invalidate();
                 }
             });
@@ -114,7 +114,7 @@ public class CanvasSplashView extends View {
                 @Override
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
-//                    mState = new
+                    mState = new MerginState();
                 }
             });
             valueAnimator.start();
@@ -122,7 +122,10 @@ public class CanvasSplashView extends View {
 
         @Override
         void drawState(Canvas canvas) {
-
+            // 绘制背景
+            drawBackgroundColor(canvas);
+            // 绘制 六个小球
+            drawCircles(canvas);
         }
     }
 
@@ -131,7 +134,7 @@ public class CanvasSplashView extends View {
 
         @Override
         void drawState(Canvas canvas) {
-
+            drawBackgroundColor(canvas);
         }
     }
 
@@ -140,10 +143,23 @@ public class CanvasSplashView extends View {
 
         @Override
         void drawState(Canvas canvas) {
-
+            drawBackgroundCircle(canvas);
         }
     }
-    private void drawBackground(Canvas canvas){
 
+    private void drawCircles(Canvas canvas) {
+        
+    }
+
+    private void drawBackgroundColor(Canvas canvas) {
+        canvas.drawColor(mBackgroundColor);
+    }
+
+    private void drawBackgroundCircle(Canvas canvas) {
+        // 绘制空心圆
+        float strokeWidth = mDistance - mCurrentHoleRadius;
+        float radius = strokeWidth / 2 + mCurrentHoleRadius;
+        mHolePaint.setStrokeWidth(strokeWidth);
+        canvas.drawCircle(mCenterX, mCenterY, radius, mHolePaint);
     }
 }
