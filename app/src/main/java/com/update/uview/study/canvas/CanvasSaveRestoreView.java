@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -38,6 +40,7 @@ public class CanvasSaveRestoreView extends View {
         mPaint.setStyle(Paint.Style.STROKE);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -63,26 +66,47 @@ public class CanvasSaveRestoreView extends View {
 //        canvas.drawRect(0, 0, 400, 400, mPaint);
 
 
-        // ------------------------ saveToCount ------------------------
+        // ------------------------ restoreToCount ------------------------
+//        Log.e("update", "update save count = " + canvas.getSaveCount());
+//        canvas.drawRect(0, 0, 300, 300, mPaint);
+//
+//        // 保存当前 画布的状态(坐标系)
+//        int layerCount = canvas.save();
+//        Log.e("update", "update save count = " + canvas.getSaveCount());
+//
+//        // 各种操作...
+//        canvas.translate(100, 100);
+//        mPaint.setColor(Color.BLUE);
+//        canvas.drawRect(0, 0, 400, 400, mPaint);
+//        // 再次保存
+//        canvas.save();
+//
+//        // 恢复到第一次保存的层级
+//        canvas.restoreToCount(layerCount);
+//        Log.e("update", "update save count = " + canvas.getSaveCount());
+//
+//        mPaint.setColor(Color.GREEN);
+//        canvas.drawRect(0, 0, 400, 400, mPaint);
+
+        // ------------------------ saveLayer ------------------------
         Log.e("update", "update save count = " + canvas.getSaveCount());
         canvas.drawRect(0, 0, 300, 300, mPaint);
 
-        // 保存当前 画布的状态(坐标系)
-        int layerCount = canvas.save();
+        // 保存当前 范围内画布的状态(坐标系)
+        canvas.saveLayer(0,0,200,200,mPaint);
         Log.e("update", "update save count = " + canvas.getSaveCount());
 
         // 各种操作...
         canvas.translate(100, 100);
         mPaint.setColor(Color.BLUE);
         canvas.drawRect(0, 0, 400, 400, mPaint);
-        // 再次保存
-        canvas.save();
+        // 恢复到之前保存的 画布状态(坐标系)
 
-        // 恢复到第一次保存的层级
-        canvas.restoreToCount(layerCount);
+        canvas.restore();
         Log.e("update", "update save count = " + canvas.getSaveCount());
 
         mPaint.setColor(Color.GREEN);
         canvas.drawRect(0, 0, 400, 400, mPaint);
+
     }
 }
