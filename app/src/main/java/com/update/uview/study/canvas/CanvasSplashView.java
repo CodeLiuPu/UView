@@ -10,12 +10,13 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+import android.view.animation.OvershootInterpolator;
 
 
 /**
  * @author : liupu
  * date   : 2019/11/7
- * desc   :
+ * desc   : 闪屏动画类
  * github : https://github.com/CodeLiuPu/
  */
 public class CanvasSplashView extends View {
@@ -39,12 +40,12 @@ public class CanvasSplashView extends View {
     // 6个小球的半径
     private float mCircleRadius = 18;
     // 旋转大圆的半径
-    private float mRetateRadius = 90;
+    private float mRotateRadius = 90;
 
     // 当前大圆的旋转角度
     private float mCurrentRotateAngle = 0f;
     // 当前大圆的半径
-    private float mCurrentRotateRadius = mRetateRadius;
+    private float mCurrentRotateRadius = mRotateRadius;
     // 扩散圆的半径
     private float mCurrentHoleRadius = 0f;
     // 旋转动画的时长
@@ -77,6 +78,14 @@ public class CanvasSplashView extends View {
                 Color.parseColor("#00C6FF"),
                 Color.parseColor("#00E099"),
                 Color.parseColor("#FF3892")};
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mCenterX = w * 1f / 2;
+        mCenterY = h * 1f / 2;
+        mDistance = (float) (Math.hypot(w, h) / 2);
     }
 
     @Override
@@ -132,14 +141,52 @@ public class CanvasSplashView extends View {
     // 2. 扩散聚合
     private class MerginState extends SplashState {
 
+        private MerginState() {
+            ValueAnimator valueAnimator = ValueAnimator.ofFloat(mCircleRadius, mRotateRadius);
+            valueAnimator.setDuration(mRotateDuration);
+            valueAnimator.setInterpolator(new OvershootInterpolator(10f));
+            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    mCurrentRotateRadius = (float) animation.getAnimatedValue();
+                    invalidate();
+                }
+            });
+            valueAnimator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    mState = new ExpandState();
+                }
+            });
+            valueAnimator.start();
+        }
+
         @Override
         void drawState(Canvas canvas) {
+            // 绘制背景
             drawBackgroundColor(canvas);
+            // 绘制 六个小球
+            drawCircles(canvas);
         }
     }
 
     // 3. 水波纹
     private class ExpandState extends SplashState {
+
+        private ExpandState() {
+            ValueAnimator valueAnimator = ValueAnimator.ofFloat(mCircleRadius, mDistance);
+            valueAnimator.setDuration(mRotateDuration);
+            valueAnimator.setInterpolator(new LinearInterpolator());
+            valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    mCurrentHoleRadius = (float) animation.getAnimatedValue();
+                    invalidate();
+                }
+            });
+            valueAnimator.start();
+        }
 
         @Override
         void drawState(Canvas canvas) {
@@ -148,7 +195,16 @@ public class CanvasSplashView extends View {
     }
 
     private void drawCircles(Canvas canvas) {
-        
+        float rotateAngle = (float) (Math.PI * 2 / mCircleColors.length);
+        for (int i = 0; i < mCircleColors.length; i++) {
+            // x = r * cos(a) + centX;
+            // y = r * sin(a) + centY;
+            float angle = rotateAngle * i + mCurrentRotateAngle;
+            float cx = (float) (Math.cos(angle) * mCurrentRotateRadius + mCenterX);
+            float cy = (float) (Math.sin(angle) * mCurrentRotateRadius + mCenterY);
+            mPaint.setColor(mCircleColors[i]);
+            canvas.drawCircle(cx, cy, mCircleRadius, mPaint);
+        }
     }
 
     private void drawBackgroundColor(Canvas canvas) {
