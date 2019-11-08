@@ -1,6 +1,8 @@
 package com.update.uview;
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 
 import com.update.uview.study.bezier.PathView;
@@ -13,6 +15,7 @@ import com.update.uview.study.bezier.PathView;
  */
 public class ViewTestActivity extends AppCompatActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
