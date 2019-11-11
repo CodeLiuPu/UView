@@ -215,12 +215,13 @@ public class DragBubbleView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        // 静止, 连接, 分离状态都需要绘制 圆背景以及文本
         if (mBubbleState != BUBBLE_STATE_DISMISS) {
-            // 绘制一个小球以及消息数据\
             canvas.drawCircle(mBubMovableCenter.x, mBubMovableCenter.y, mBubMovableRadius, mBubblePaint);
             mTextPaint.getTextBounds(mTextStr, 0, mTextStr.length(), mTextRect);
-            canvas.drawText(mTextStr,mBubMovableCenter.x - mTextRect.width() /2, mBubMovableCenter.y+mTextRect.height()/2,mTextPaint);
+            canvas.drawText(mTextStr, mBubMovableCenter.x - mTextRect.width() / 2, mBubMovableCenter.y + mTextRect.height() / 2, mTextPaint);
         }
+
         // 1. 静止状态, 一个小球+消息数据
 
         // 2. 连线状态, 一个小球+消息数据 贝塞尔曲线, 原本位置上的小球
