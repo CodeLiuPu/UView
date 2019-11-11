@@ -149,10 +149,11 @@ public class DragBubbleView extends View {
     public DragBubbleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.DragBubbleView, defStyleAttr, 0);
-        mBubbleRadius = array.getDimension(R.styleable.DragBubbleView_bubble_radius, mBubbleRadius);
+        mBubbleRadius = array.getDimension(R.styleable.DragBubbleView_bubble_radius, 8);
         mBubbleColor = array.getColor(R.styleable.DragBubbleView_bubble_color, Color.RED);
-        mTextStr = array.getString(R.styleable.DragBubbleView_bubble_text);
-        mTextSize = array.getDimension(R.styleable.DragBubbleView_bubble_textSize, mTextSize);
+//        mTextStr = array.getString(R.styleable.DragBubbleView_bubble_text);
+        mTextStr = "99";
+        mTextSize = array.getDimension(R.styleable.DragBubbleView_bubble_textSize, 8);
         mTextColor = array.getColor(R.styleable.DragBubbleView_bubble_textColor, Color.WHITE);
         array.recycle();
 
@@ -195,11 +196,31 @@ public class DragBubbleView extends View {
 
     private void initWH(int w, int h) {
         mBubbleState = BUBBLE_STATE_DEFAULT;
+
+        //设置固定气泡圆心初始坐标
+        if (mBubFixedCenter == null) {
+            mBubFixedCenter = new PointF(w / 2, h / 2);
+        } else {
+            mBubFixedCenter.set(w / 2, h / 2);
+        }
+        //设置可动气泡圆心初始坐标
+        if (mBubMovableCenter == null) {
+            mBubMovableCenter = new PointF(w / 2, h / 2);
+        } else {
+            mBubMovableCenter.set(w / 2, h / 2);
+        }
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
+        if (mBubbleState != BUBBLE_STATE_DISMISS) {
+            // 绘制一个小球以及消息数据\
+            canvas.drawCircle(mBubMovableCenter.x, mBubMovableCenter.y, mBubMovableRadius, mBubblePaint);
+            mTextPaint.getTextBounds(mTextStr, 0, mTextStr.length(), mTextRect);
+            canvas.drawText(mTextStr,mBubMovableCenter.x - mTextRect.width() /2, mBubMovableCenter.y+mTextRect.height()/2,mTextPaint);
+        }
         // 1. 静止状态, 一个小球+消息数据
 
         // 2. 连线状态, 一个小球+消息数据 贝塞尔曲线, 原本位置上的小球
