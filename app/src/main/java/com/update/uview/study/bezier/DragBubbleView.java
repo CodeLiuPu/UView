@@ -151,8 +151,7 @@ public class DragBubbleView extends View {
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.DragBubbleView, defStyleAttr, 0);
         mBubbleRadius = array.getDimension(R.styleable.DragBubbleView_bubble_radius, 8);
         mBubbleColor = array.getColor(R.styleable.DragBubbleView_bubble_color, Color.RED);
-//        mTextStr = array.getString(R.styleable.DragBubbleView_bubble_text);
-        mTextStr = "99";
+        mTextStr = array.getString(R.styleable.DragBubbleView_bubble_text);
         mTextSize = array.getDimension(R.styleable.DragBubbleView_bubble_textSize, 8);
         mTextColor = array.getColor(R.styleable.DragBubbleView_bubble_textColor, Color.WHITE);
         array.recycle();
@@ -222,6 +221,10 @@ public class DragBubbleView extends View {
             canvas.drawText(mTextStr, mBubMovableCenter.x - mTextRect.width() / 2, mBubMovableCenter.y + mTextRect.height() / 2, mTextPaint);
         }
 
+        if (mBubbleState == BUBBLE_STATE_CONNECT) {
+
+        }
+
         // 1. 静止状态, 一个小球+消息数据
 
         // 2. 连线状态, 一个小球+消息数据 贝塞尔曲线, 原本位置上的小球
@@ -234,6 +237,38 @@ public class DragBubbleView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if (mBubbleState != BUBBLE_STATE_DISMISS) {
+                    mDist = (float) Math.hypot(event.getX() - mBubFixedCenter.x, event.getY() - mBubFixedCenter.y);
+                    // 加上 MOVE_OFFSET 为了方便拖拽
+                    if (mDist < mBubbleRadius + MOVE_OFFSET) {
+                        mBubbleState = BUBBLE_STATE_CONNECT;
+                    } else {
+                        mBubbleState = BUBBLE_STATE_DEFAULT;
+                    }
+                }
+                break;
+            case MotionEvent.ACTION_MOVE:
+                if (mBubbleState != BUBBLE_STATE_DEFAULT) {
+                    mDist = (float) Math.hypot(event.getX() - mBubFixedCenter.x, event.getY() - mBubFixedCenter.y);
+                    mBubMovableCenter.x = event.getX();
+                    mBubMovableCenter.y = event.getY();
+                    if (mBubbleState == BUBBLE_STATE_CONNECT) {
+                        if (mDist < mMaxDist - MOVE_OFFSET){
+                            mBubFixedRadius   = mBubbleRadius - mDist /8;
+                        } else {
+                            mBubbleState = BUBBLE_STATE_APART;
+                        }
+                    }
+                    invalidate();
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+
+                break;
+            default:
+        }
+        return true;
     }
 }

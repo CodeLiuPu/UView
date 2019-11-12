@@ -19,8 +19,8 @@ public class ViewTestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(new DragBubbleView(this));
-//        setContentView(R.layout.activity_splash);
+//        setContentView(new DragBubbleView(this));
+        setContentView(R.layout.view_drag_bubble);
     }
 
 }
