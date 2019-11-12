@@ -214,6 +214,12 @@ public class DragBubbleView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        if (mBubbleState == BUBBLE_STATE_CONNECT) {
+            // 控制不动气泡
+            canvas.drawCircle(mBubFixedCenter.x, mBubFixedCenter.y, mBubFixedRadius, mBubblePaint);
+            // 绘制贝塞尔曲线
+        }
+
         // 静止, 连接, 分离状态都需要绘制 圆背景以及文本
         if (mBubbleState != BUBBLE_STATE_DISMISS) {
             canvas.drawCircle(mBubMovableCenter.x, mBubMovableCenter.y, mBubMovableRadius, mBubblePaint);
@@ -221,15 +227,12 @@ public class DragBubbleView extends View {
             canvas.drawText(mTextStr, mBubMovableCenter.x - mTextRect.width() / 2, mBubMovableCenter.y + mTextRect.height() / 2, mTextPaint);
         }
 
-        if (mBubbleState == BUBBLE_STATE_CONNECT) {
 
-        }
+        // 1. 静止状态, 一个气泡+消息数据
 
-        // 1. 静止状态, 一个小球+消息数据
+        // 2. 连线状态, 一个气泡+消息数据 贝塞尔曲线, 原本位置上的小球
 
-        // 2. 连线状态, 一个小球+消息数据 贝塞尔曲线, 原本位置上的小球
-
-        // 3. 分离状态, 一个小球+消息数据
+        // 3. 分离状态, 一个气泡+消息数据
 
         // 4, 消失状态, 消失的气泡
 
