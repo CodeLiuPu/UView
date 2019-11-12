@@ -12,7 +12,7 @@ import android.view.View;
 /**
  * @author : liupu
  * date   : 2019/11/12
- * desc   :
+ * desc   : TouchTestView
  * github : https://github.com/CodeLiuPu/
  */
 public class TouchTestView extends View {
@@ -59,7 +59,6 @@ public class TouchTestView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                break;
             case MotionEvent.ACTION_MOVE:
                 mRect.set(event.getX(), event.getY());
                 invalidate();
