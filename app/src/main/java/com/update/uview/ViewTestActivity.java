@@ -2,8 +2,13 @@ package com.update.uview;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+
+import com.update.uview.layout.flow_layout.FlowLayoutFragment;
 
 /**
  * @author : liupu
@@ -18,7 +23,14 @@ public class ViewTestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(new TouchTestView(this));
-        setContentView(R.layout.view_drag_bubble);
+//        setContentView(R.layout.view_drag_bubble);
+        addFragment(new FlowLayoutFragment());
     }
 
+    private void addFragment(@NonNull Fragment fragment) {
+        setContentView(R.layout.activity_fragment_container);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fl_container, fragment);
+        ft.commitAllowingStateLoss();
+    }
 }
