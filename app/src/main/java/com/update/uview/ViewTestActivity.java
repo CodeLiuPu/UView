@@ -1,14 +1,12 @@
 package com.update.uview;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import com.update.uview.layout.flow_layout.FlowLayoutFragment;
+import com.update.uview.study.bezier.PathMeasureView;
 
 /**
  * @author : liupu
@@ -18,13 +16,12 @@ import com.update.uview.layout.flow_layout.FlowLayoutFragment;
  */
 public class ViewTestActivity extends AppCompatActivity {
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(new TouchTestView(this));
+        setContentView(new PathMeasureView(this));
 //        setContentView(R.layout.view_drag_bubble);
-        addFragment(new FlowLayoutFragment());
+//        addFragment(new FlowLayoutFragment());
     }
 
     private void addFragment(@NonNull Fragment fragment) {
