@@ -58,11 +58,11 @@ public class PathMeasureView extends View {
         canvas.drawLine(getWidth() / 2, 0, getWidth() / 2, getHeight(), mLinePaint);
         canvas.translate(getWidth() / 2, getHeight() / 2);
 
-        Path path = new Path();
-        path.lineTo(0, 200);
-        path.lineTo(200, 200);
-        path.lineTo(200, 0);
-
+//        Path path = new Path();
+//        path.lineTo(0, 200);
+//        path.lineTo(200, 200);
+//        path.lineTo(200, 0);
+//
 //        /**
 //         * pathMeasure 需要关联一个 创建好的 path
 //         * forceClosed会影响Path的测量结果
@@ -74,18 +74,33 @@ public class PathMeasureView extends View {
 //        PathMeasure pathMeasure2 = new PathMeasure();
 //        pathMeasure2.setPath(path, true);
 //        log("onDraw2: " + pathMeasure2.getLength());
+//        canvas.drawPath(path, mPaint);
 
+// ------------------------- new PathMeasure(path, false) ------------------------------
+//        PathMeasure pathMeasure = new PathMeasure(path, false);
+//        log("onDraw: " + pathMeasure.getLength());
+//
+//        path.lineTo(200, -200);
+//        log("onDraw: " + pathMeasure.getLength());
+//
+//        // 如果 path 进行了调整, 需要重新调用 setPath 来进行关联
+//        pathMeasure.setPath(path, false);
+//        log("onDraw: " + pathMeasure.getLength());
+//        canvas.drawPath(path, mPaint);
+
+        // -------------------------------------------------------------
+
+        Path path = new Path();
+        path.addRect(-200, -200, 200, 200, Path.Direction.CW);
+
+        Path dst = new Path();
+
+         // forceClosed 截取一部分存入dst中，并且使用moveTo保持截取得到的Path第一个点位置不变。
         PathMeasure pathMeasure = new PathMeasure(path, false);
-        log("onDraw: " + pathMeasure.getLength());
-
-        path.lineTo(200, -200);
-        log("onDraw: " + pathMeasure.getLength());
-
-        // 如果 path 进行了调整, 需要重新调用 setPath 来进行关联
-        pathMeasure.setPath(path, false);
-        log("onDraw: " + pathMeasure.getLength());
+        pathMeasure.getSegment(200, 1000, dst, false);
 
         canvas.drawPath(path, mPaint);
+        canvas.drawPath(dst, mLinePaint);
     }
 
 
