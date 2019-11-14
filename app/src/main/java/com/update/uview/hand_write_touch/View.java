@@ -38,6 +38,17 @@ public class View {
         this.onTouchListener = onTouchListener;
     }
 
+    protected boolean isContainer(int x, int y) {
+        return x > left && x < right && y > top && y < bottom;
+    }
+
+    // 接收事件分发
+    public boolean dispatchTouchEvent(MotionEvent event){
+        boolean result = false;
+
+        return result;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
