@@ -7,4 +7,7 @@ package com.update.uview.hand_write_touch;
  * github : https://github.com/CodeLiuPu/
  */
 public class Activity {
+    public static void main(String[] args) {
+
+    }
 }
