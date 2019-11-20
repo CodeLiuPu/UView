@@ -32,22 +32,61 @@ public class ViewGroup extends View {
     }
 
     // 事件分发入口
-    public boolean dispatchTouchEvent(){
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        int actionMasked = event.getActionMasked();
+        boolean intercepted = onInterceptTouchEvent(event);
+        boolean handled = false;
+        TouchTarget newTouchTarget;
+        if (actionMasked != MotionEvent.ACTION_CANCEL && !intercepted) {
+            if (actionMasked == MotionEvent.ACTION_DOWN) {
+                final View[] childrens = mChildrens;
+                // 遍历 倒序
+                for (int i = mChildrens.length - 1; i >= 0; i--) {
+                    View child = mChildrens[i];
+                    // 如果View不能接收事件
+                    if (!child.isContainer(event.getX(), event.getY())) {
+                        continue;
+                    }
 
+                    // 能够接收事件 则将事件分发给 child
+                    if (dispatchTransformedTouchEvent(event, child)) {
+                        handled = true;
+                        newTouchTarget = addTouchTarget(child);
+                        break;
+                    }
+                }
+            }
+        }
 
-        
-
-
-
-        return false;
+        if (mFirstTouchTarget == null) {
+            handled = dispatchTransformedTouchEvent(event, null);
+        }
+        return handled;
     }
 
+    // 分发处理
+    private boolean dispatchTransformedTouchEvent(MotionEvent event, View child) {
+        boolean handled = false;
+        if (child != null) {
+            handled = child.dispatchTouchEvent(event);
+        } else {
+            super.dispatchTouchEvent(event);
+        }
+        return handled;
+    }
 
     // 拦截事件
-    public boolean onInterceptTouchEvent(MotionEvent event){
+    public boolean onInterceptTouchEvent(MotionEvent event) {
         return false;
     }
 
+    private TouchTarget addTouchTarget(View child) {
+        final TouchTarget target = TouchTarget.obtain(child);
+        target.next = mFirstTouchTarget;
+        mFirstTouchTarget = target;
+        return target;
+    }
 
     private static final class TouchTarget {
         // 当前缓存的View
@@ -78,12 +117,12 @@ public class ViewGroup extends View {
             return target;
         }
 
-        public void recycle(){
-            if (child ==null){
+        public void recycle() {
+            if (child == null) {
                 throw new IllegalStateException("已经被回收过了");
             }
-            synchronized (sRecycleLock){
-                if (sRecycleCount < 32){
+            synchronized (sRecycleLock) {
+                if (sRecycleCount < 32) {
                     next = sRecycleBin;
                     sRecycleBin = this;
                     sRecycleCount++;
