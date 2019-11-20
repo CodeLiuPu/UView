@@ -43,10 +43,24 @@ public class View {
     }
 
     // 接收事件分发
-    public boolean dispatchTouchEvent(MotionEvent event){
+    public boolean dispatchTouchEvent(MotionEvent event) {
         boolean result = false;
+        if (onTouchListener != null && onTouchListener.onTouch(this, event)) {
+            result = true;
+        }
 
+        if (!result && onTouchEvent(event)) {
+            result = true;
+        }
         return result;
+    }
+
+    private boolean onTouchEvent(MotionEvent event) {
+        if (onClickListener!= null){
+            onClickListener.onClick(this);
+            return true;
+        }
+        return false;
     }
 
     public void setName(String name) {
