@@ -6,33 +6,63 @@
 
     <com.update.uview.layout.flow_layout.FlowLayoutV1
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hhh" />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="h3hh" />
+            android:layout_margin="6dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="hhh"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hh4h" />
+            android:layout_margin="6dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="hehh"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hh5h" />
+            android:layout_margin="6dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="hehh"
+            android:textColor="@android:color/black" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="hh6h" />
+            android:layout_margin="6dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="hehh"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="hehh"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="hehh"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="hehh"
+            android:textColor="@android:color/black" />
 
 
     </com.update.uview.layout.flow_layout.FlowLayoutV1>

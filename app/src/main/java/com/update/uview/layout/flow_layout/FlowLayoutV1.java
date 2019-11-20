@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * @author : liupu
  * date   : 2019/10/12
- * desc   : 流布局V1
+ * desc   : 流布局 V1
  * github : https://github.com/CodeLiuPu/
  */
 public class FlowLayoutV1 extends ViewGroup {
@@ -35,33 +35,45 @@ public class FlowLayoutV1 extends ViewGroup {
         super(context, attrs, defStyleAttr);
     }
 
+
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        // 先完成自己的宽高测量
+        // 父容器的 宽高Mode 以及 宽高Size
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
+        // 当前控件的 宽高
         int measureWidth = 0;
         int measureHeight = 0;
-        int currentLineW = 0;
-        int currentLineH = 0;
+
 
         if (widthMode == MeasureSpec.EXACTLY && heightMode == MeasureSpec.EXACTLY) {
             measureWidth = widthSize;
             measureHeight = heightSize;
         } else {
-            int childW;
-            int childH;
+            // 当前行宽高
+            int currentLineW = 0;
+            int currentLineH = 0;
+            int childW = 0;
+            int childH = 0;
+
+            // 子控件数量
             int childCount = getChildCount();
             List<View> viewList = new ArrayList<>();
             for (int i = 0; i < childCount; i++) {
                 View childView = getChildAt(i);
+                // 先让子View 进行测量
                 measureChild(childView, widthMeasureSpec, heightMeasureSpec);
                 MarginLayoutParams layoutParams = (MarginLayoutParams) childView.getLayoutParams();
+
+                // 获得子View实际的宽高
                 childW = childView.getMeasuredWidth() + layoutParams.leftMargin + layoutParams.rightMargin;
                 childH = childView.getMeasuredHeight() + layoutParams.topMargin + layoutParams.bottomMargin;
 
+                // 判断是否需要换行
                 if (currentLineW + childW > widthSize) {
                     // 需要换行记录当前行信息
                     // 记录当前行的最大高度, 高度累加
@@ -73,6 +85,7 @@ public class FlowLayoutV1 extends ViewGroup {
                     // 记录新一行信息
                     currentLineW = childW;
                     currentLineH = childH;
+
                     viewList = new ArrayList<>();
                     viewList.add(childView);
 
@@ -103,20 +116,24 @@ public class FlowLayoutV1 extends ViewGroup {
         int left, top, right, bottom;
         int currentTop = 0;
         int currentLeft = 0;
-        int lineCount = mAllViews.size();
 
+        int lineCount = mAllViews.size();
         for (int i = 0; i < lineCount; i++) {
+
             List<View> viewList = mAllViews.get(i);
             int lineViewSize = viewList.size();
             for (int j = 0; j < lineViewSize; j++) {
-                View childView = viewList.get(i);
+
+                View childView = viewList.get(j);
                 MarginLayoutParams layoutParams = (MarginLayoutParams) childView.getLayoutParams();
 
                 left = currentLeft + layoutParams.leftMargin;
                 top = currentTop + layoutParams.topMargin;
                 right = left + childView.getMeasuredWidth() + layoutParams.rightMargin;
                 bottom = top + childView.getMeasuredHeight() + layoutParams.bottomMargin;
+
                 childView.layout(left, top, right, bottom);
+
                 currentLeft += layoutParams.leftMargin + childView.getMeasuredWidth() + layoutParams.rightMargin;
             }
             currentLeft = 0;
