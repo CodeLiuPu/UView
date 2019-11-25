@@ -3,6 +3,7 @@ package com.update.uview.layout.rv;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 import android.view.ViewGroup;
 
 /**
@@ -29,5 +30,25 @@ public class RecyclerView extends ViewGroup {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
 
+    }
+
+    interface Adapter {
+        View onCreateViewHolder(int position, View convertView, ViewGroup parent);
+
+        View onBindViewHolder(int position, View convertView, ViewGroup parent);
+
+        /**
+         * 获取 Item的类型
+         */
+        int getItemViewType(int raw);
+
+        /**
+         * 获取 Item 类型的数量
+         */
+        int getItemTypeCount();
+
+        int getCount();
+
+        int getHeight(int index);
     }
 }
