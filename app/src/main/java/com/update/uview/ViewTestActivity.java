@@ -6,8 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import com.update.uview.layout.flow_layout.FlowLayoutFragment;
-import com.update.uview.study.bezier.PathMeasureView;
+import com.update.uview.choreographer.ChoreographerFragment;
 
 /**
  * @author : liupu
@@ -22,7 +21,7 @@ public class ViewTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 //        setContentView(new PathMeasureView(this));
 //        setContentView(R.layout.view_drag_bubble);
-        addFragment(new FlowLayoutFragment());
+        addFragment(new ChoreographerFragment());
     }
 
     private void addFragment(@NonNull Fragment fragment) {
