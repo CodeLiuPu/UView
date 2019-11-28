@@ -10,8 +10,8 @@ import java.util.concurrent.BlockingQueue;
  * github : https://github.com/CodeLiuPu/
  */
 public class MessageQueue {
-    
-    BlockingQueue<Message> blockingQueue;
+
+    private BlockingQueue<Message> blockingQueue;
 
     public MessageQueue() {
         blockingQueue = new ArrayBlockingQueue<>(50);
