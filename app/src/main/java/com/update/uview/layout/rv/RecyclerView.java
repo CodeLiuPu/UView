@@ -78,8 +78,32 @@ public class RecyclerView extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
+        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
+        int h = 0;
+        if (adapter != null) {
+            this.rowCount = adapter.getCount();
+            heights = new int[rowCount];
+            for (int i = 0; i < heights.length; i++) {
+                heights[i] = adapter.getHeight(i);
+            }
+        }
 
+        // 数据的高度
+        int tempH = sumArray(heights, 0, heights.length);
+        h = Math.min(heightSize, tempH);
+        setMeasuredDimension(widthSize, h);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    //    firstIndex  firstIndex+count
+    private int sumArray(int array[], int firstIndex, int count) {
+        int sum = 0;
+        count += firstIndex;
+        for (int i = firstIndex; i < count; i++) {
+            sum += array[i];
+        }
+        return sum;
     }
 
     @Override
