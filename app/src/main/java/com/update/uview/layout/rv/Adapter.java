@@ -11,12 +11,12 @@ public interface Adapter {
     /**
      * 获取 Item的类型
      */
-    int getItemViewType(int raw);
+    int getItemViewType(int row);
 
     /**
      * 获取 Item 类型的数量
      */
-    int getItemTypeCount();
+    int getViewTypeCount();
 
     int getCount();
 
